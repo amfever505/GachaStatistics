@@ -1,33 +1,40 @@
 <body>
   <div class="wrapper">
     <div class="outter-title">
-      <div class="title"></div>
+      <!-- <div class="title"></div> -->
+
+      <form action="/somewhere/to/upload" enctype="multipart/form-data">
+        <input name="title_img" type="file" id="imgInp" accept="image/gif,
+        image/jpeg, image/png"/ >
+        <img id="preview_title_img" src="#" />
+      </form>
     </div>
+
     <div class="counter-group">
       <div>
-        <div>
-          <span class="u-text">SSR率：</span>
+        <div class="u-text">
+          <span>SSR率：</span>
           <span id="ssrRatio"></span>
         </div>
       </div>
 
       <div>
         <div class="u-text">
-          常駐SSR：
+          <span>常駐SSR：</span>
           <input type="number" min="0" class="count" id="commonSsr" />
           <button class="btn btn-warning btn-sm" id="commonSsrPlusOne">
             +1
           </button>
         </div>
         <div class="u-text">
-          限定SSR：
+          <span>限定SSR：</span>
           <input type="number" min="0" class="count" id="specialSsr" />
           <button class="btn btn-warning btn-sm" id="specialSsrPlusOne">
             +1
           </button>
         </div>
         <div class="u-text">
-          回数：
+          <span>回数：</span>
           <input type="number" min="0" class="count" id="gachaCount" />
           <button class="btn btn-warning btn-sm" id="gachaCountPlusOne">
             +1
@@ -88,6 +95,27 @@
       }
     );
   });
+
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('#preview_title_img').attr('src', e.target.result);
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  function showImg() {
+    var oImg = document.getElementById('preview_title_img');
+    oImg.style.display = 'inline-block';
+    var oInput = document.getElementById('imgInp');
+    oInput.style.display = 'none';
+  }
+  $('#imgInp').change(function () {
+    readURL(this);
+    showImg();
+  });
 </script>
 
 <style>
@@ -101,26 +129,44 @@
   }
 
   .wrapper {
-    width: 240px;
+    width: 250px;
     background-color: #ffd9ec;
     overflow: hidden;
-    position: absolute; //top: 50%;
-    //left: 50%;
-    //transform: translate(-50%,-50%)
+    position: absolute;
+    /* top: 50%; */
+    /* left: 50%; */
+    /* transform: translate(-50%,-50%) */
   }
 
   .outter-title {
     width: 100%;
     height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
   }
 
+  .outter-title img {
+    display: none;
+    width: 100%;
+    height: auto;
+  }
+  .outter-title form {
+    margin: 0;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .title {
     width: 100%;
     height: 100%;
-    background-image: url(./assets/img/title.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    /* background-image: url(./assets/img/gachatitle.png); */
+    /* background-repeat: no-repeat; */
+    /* background-position: center; */
+    /* background-size: 100%; */
   }
 
   .counter-group {
@@ -129,7 +175,7 @@
     border: 0 solid #fff;
     border-radius: 12px;
     background-color: rgba(255, 255, 255, 0.5);
-    padding: 8px;
+    padding: 16px 8px;
   }
 
   .count {
@@ -138,11 +184,11 @@
 
   .u-text {
     font-size: 16px;
+    margin-left: 20px;
     font-family: 微軟正黑體;
     line-height: 32px;
     margin-bottom: 4px;
-    margin-left: 4px;
-    transition: 0.3s;
+    padding-left: 0px;
   }
 
   .u-text:before {
@@ -151,6 +197,8 @@
     text-align: center;
     width: 16px;
     height: 16px;
+    margin-left: -16px;
+    margin-right: -5.5px;
     background-image: url(./assets/img/icon.png);
     background-repeat: no-repeat;
     background-position: center;
@@ -159,6 +207,8 @@
 
   .u-text:hover:before {
     display: inline-block;
+    top: 0;
+    left: 0;
   }
 
   .outter-img {
