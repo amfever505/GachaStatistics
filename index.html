@@ -1,5 +1,10 @@
+<head>
+  <title></title>
+  <link rel='stylesheet' type='text/css'
+  href='./assets/js/spectrum-2.0.0/src/spectrum.css' / >
+</head>
 <body>
-  <div class="wrapper">
+  <div class="wrapper" id="bg">
     <div class="outter-title">
       <!-- <div class="title"></div> -->
 
@@ -52,20 +57,18 @@
       <button class="setting-btn">
         <img src="./assets/img/setting.png" />
       </button>
+      <input id="color-picker" value="#ffffff" />
     </div>
+    <div class="setting-menu"></div>
   </div>
 </body>
 
 <script src="./assets/js/general/jquery-3.3.1.min.js"></script>
-<script src="./assets/js/general/spectrum.min.js"></script>
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="./assets/css/general/spectrum.min.css"
-/>
+<script src="./assets/js/spectrum-2.0.0/src/spectrum.js"></script>
+
 <script>
   function init() {
-    $('title').text('抽卡');
+    $('title').text('ガシャ');
     $('#commonSsr, #specialSsr, #gachaCount').val(0);
     execute();
     window.resizeTo(276, 380);
@@ -135,6 +138,14 @@
   $('#color-picker').spectrum({
     type: 'component',
     showAlpha: 'false',
+    showButtons: 'false',
+  });
+
+  $('#color-picker').on('change', function () {
+    var newBgcolor = document.getElementById('color-picker').value;
+    document.getElementById('bg').style.backgroundColor = newBgcolor;
+
+    console.log(newBgcolor);
   });
 </script>
 
@@ -147,20 +158,25 @@
   body {
     margin: 0;
   }
+  input {
+    box-shadow: none;
+    color: inherit;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
 
+    font-size: 14px;
+    font-family: inherit;
+  }
   .wrapper {
     width: 250px;
     background-color: #ffd9ec;
     overflow: hidden;
     position: relative;
-    /* top: 50%; */
-    /* left: 50%; */
-    /* transform: translate(-50%,-50%) */
   }
 
   .outter-title {
     width: 100%;
-    height: 80px;
+    min-height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -169,7 +185,7 @@
 
   .outter-title img {
     display: none;
-    width: 100%;
+    max-width: 100%;
     height: auto;
   }
   .outter-title form {
@@ -179,6 +195,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  .outter-title input {
+    position: absolute;
+    left: 0;
   }
   .title {
     width: 100%;
@@ -199,7 +219,7 @@
   }
 
   .count {
-    width: 40px;
+    width: 50px;
   }
 
   .u-text {
@@ -233,7 +253,7 @@
 
   .outter-img {
     width: 100%;
-    padding-top: 30%;
+    min-height: 60px;
   }
 
   .img {
@@ -266,17 +286,18 @@
   .btn {
     padding: 2px 8px;
     margin-left: 4px;
-    background: linear-gradient(
+    /* background: linear-gradient(
       180deg,
       #fc88e3 0%,
       #fc88e3 30%,
       #e44bbb 70%,
       #e44bbb 100%
-    );
+    ); */
+    background: linear-gradient(to top, #ffafbd, #ffc3a0);
     border: 0px solid #fff;
     color: #fff;
     border-radius: 2px;
-    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.7);
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.5);
     overflow: hidden;
   }
 
