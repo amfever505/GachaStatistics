@@ -1,7 +1,6 @@
 <head>
   <title></title>
-  <link rel='stylesheet' type='text/css'
-  href='./assets/js/spectrum-2.0.0/src/spectrum.css' / >
+  <link rel='stylesheet' type='text/css' href='./assets/js/spectrum-2.0.0/src/spectrum.css' / >
 </head>
 <body>
   <div class="wrapper" id="bg">
@@ -9,13 +8,10 @@
       <!-- <div class="title"></div> -->
 
       <form action="/somewhere/to/upload" enctype="multipart/form-data">
-        <input name="title_img" type="file" id="imgInp" accept="image/gif,
-        image/jpeg, image/png"/ >
+        <input name="title_img" type="file" id="imgInp" accept="image/gif, image/jpeg, image/png"/ >
         <img id="preview_title_img" src="#" />
       </form>
-      <button class="btn-warning btn-sm delete_button" id="deleteButton">
-        ×
-      </button>
+      <button class="btn-warning btn-sm delete_button" id="deleteButton">×</button>
     </div>
 
     <div class="counter-group">
@@ -30,26 +26,18 @@
         <div class="u-text">
           <span>常駐SSR：</span>
           <input type="number" min="0" class="count" id="commonSsr" />
-          <button class="btn btn-warning btn-sm" id="commonSsrPlusOne">
-            +1
-          </button>
+          <button class="btn btn-warning btn-sm" id="commonSsrPlusOne">+1</button>
         </div>
         <div class="u-text">
           <span>限定SSR：</span>
           <input type="number" min="0" class="count" id="specialSsr" />
-          <button class="btn btn-warning btn-sm" id="specialSsrPlusOne">
-            +1
-          </button>
+          <button class="btn btn-warning btn-sm" id="specialSsrPlusOne">+1</button>
         </div>
         <div class="u-text">
           <span>回数：</span>
           <input type="number" min="0" class="count" id="gachaCount" />
-          <button class="btn btn-warning btn-sm" id="gachaCountPlusOne">
-            +1
-          </button>
-          <button class="btn btn-warning btn-sm" id="gachaCountPlusTen">
-            +10
-          </button>
+          <button class="btn btn-warning btn-sm" id="gachaCountPlusOne">+1</button>
+          <button class="btn btn-warning btn-sm" id="gachaCountPlusTen">+10</button>
         </div>
       </div>
     </div>
@@ -75,13 +63,9 @@
   }
 
   function execute() {
-    var totalSsr =
-      parseInt($('#commonSsr').val()) + parseInt($('#specialSsr').val());
+    var totalSsr = parseInt($('#commonSsr').val()) + parseInt($('#specialSsr').val());
     var totalGacha = parseInt($('#gachaCount').val());
-    var result =
-      totalGacha <= 0.0
-        ? (0).toFixed(2) + '%'
-        : ((totalSsr / totalGacha) * 100).toFixed(2) + '%';
+    var result = totalGacha <= 0.0 ? (0).toFixed(2) + '%' : ((totalSsr / totalGacha) * 100).toFixed(2) + '%';
     $('#ssrRatio').text(result);
   }
 
@@ -97,15 +81,12 @@
       execute();
     });
 
-    $('#commonSsrPlusOne, #specialSsrPlusOne, #gachaCountPlusOne').on(
-      'click',
-      function () {
-        var elementSelector = '#' + this.id.replace('PlusOne', '');
-        var value = parseInt($(elementSelector).val()) + 1;
-        $(elementSelector).val(value);
-        execute();
-      }
-    );
+    $('#commonSsrPlusOne, #specialSsrPlusOne, #gachaCountPlusOne').on('click', function () {
+      var elementSelector = '#' + this.id.replace('PlusOne', '');
+      var value = parseInt($(elementSelector).val()) + 1;
+      $(elementSelector).val(value);
+      execute();
+    });
   });
   //header照片讀取
   function readURL(input) {
@@ -172,6 +153,7 @@
     background-color: #ffd9ec;
     overflow: hidden;
     position: relative;
+    margin: 0 auto;
   }
 
   .outter-title {
